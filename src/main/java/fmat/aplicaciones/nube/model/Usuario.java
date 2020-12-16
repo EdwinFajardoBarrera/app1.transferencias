@@ -17,11 +17,15 @@ public class Usuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "clave")
+    @Column(name = "clave",unique = true)
     private String clave;
 
     public Usuario(Integer id, String nombre,String clave) {
         this.id = id;
+        this.nombre = nombre;
+        this.clave= clave;
+    }
+    public Usuario( String nombre,String clave) {
         this.nombre = nombre;
         this.clave= clave;
     }

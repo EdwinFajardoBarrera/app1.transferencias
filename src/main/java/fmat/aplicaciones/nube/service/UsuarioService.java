@@ -1,13 +1,12 @@
 package fmat.aplicaciones.nube.service;
 import java.util.List;
-import java.util.UUID;
-import javax.transaction.Transactional;
-
+import java.util.Optional;
 import fmat.aplicaciones.nube.model.Usuario;
-import fmat.aplicaciones.nube.model.request.UsuarioRequest;
+import fmat.aplicaciones.nube.exception.NotFoundException;
 import fmat.aplicaciones.nube.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 
@@ -20,6 +19,21 @@ public class UsuarioService {
 
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+
+    public Usuario deleteUsuario(Integer id) {
+        Usuario user = findUser(id);
+        usuarioRepository.deleteById(id);
+        return user;
+    }
+
+    public Usuario findUser(Integer id) {
+        Optional<Usuario> opt = usuarioRepository.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        }
+        throw new NotFoundException("El usuario no se encuentra");
     }
 
     /*

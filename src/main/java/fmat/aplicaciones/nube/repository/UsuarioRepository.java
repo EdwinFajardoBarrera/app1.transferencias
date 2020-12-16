@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    @Query ("SELECT u from Usuario u WHERE u.usuario=?1")
-    public Usuario findByUsuario(String usuario);
-    Usuario findByToken(String token);
-
+    @Query ("SELECT u from Usuario u WHERE u.clave=?1")
+    public Usuario findByClave(String usuario);
 }
