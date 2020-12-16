@@ -19,10 +19,9 @@
 		<flyway.version>7.2.0</flyway.version>
 		<flyway.user>root</flyway.user>
 		<flyway.password>root</flyway.password>
-		<database.url>jdbc:mysql://localhost:3306/Transferencias</database.url>
+		<database.url>jdbc:mysql://localhost:3306</database.url>
 		<database.user>root</database.user>
 		<database.password>root</database.password>
-		<flyway.schemas>Transferencias</flyway.schemas>
 	</properties>
 
 	<dependencies>
@@ -72,11 +71,11 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:mysql://localhost:3306/Transferencias</url>
+					<url>jdbc:mysql://localhost:3306</url>
 					<user>root</user>
 					<password>root</password>
 					<schemas>
-						<schema>sicei</schema>
+						<schema>Transferencias</schema>
 					</schemas>
 				</configuration>
 			</plugin>
