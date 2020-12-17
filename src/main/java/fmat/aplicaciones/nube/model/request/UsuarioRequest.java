@@ -17,6 +17,11 @@ public class UsuarioRequest {
     @NotEmpty
     private String clave;
 
+    @NotNull(message = "Favor de ingresar su contraseña")
+    @Size(min = 9, max = 50)
+    @NotEmpty
+    private String password;
+
     public String getNombre() {
         return nombre;
     }
@@ -31,5 +36,13 @@ public class UsuarioRequest {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

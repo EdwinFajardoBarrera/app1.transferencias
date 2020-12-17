@@ -2,10 +2,12 @@ package fmat.aplicaciones.nube.service;
 import java.util.List;
 import java.util.Optional;
 import fmat.aplicaciones.nube.model.Usuario;
+import fmat.aplicaciones.nube.model.request.UsuarioRequest;
 import fmat.aplicaciones.nube.exception.NotFoundException;
 import fmat.aplicaciones.nube.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import fmat.aplicaciones.nube.exception.InvalidOperationException;
 
 
 
@@ -34,6 +36,24 @@ public class UsuarioService {
             return opt.get();
         }
         throw new NotFoundException("El usuario no se encuentra");
+    }
+
+    public Usuario register(UsuarioRequest request) {
+        Usuario usuario = usuarioRepository.findByClave(request.getClave());
+        Boolean usuarioExist = usuario != null;
+        if (usuarioExist) {
+            throw new InvalidOperationException("El usuario ya esta registrado en el sistema");
+        }
+        Usuario usuarioCrear = new Usuario();
+        //String secret = UUID.randomUUID().toString();
+        usuarioCrear.setPassword(request.getPassword());
+        usuarioCrear.setNombre(request.getNombre());
+        usuarioCrear.setClave(request.getClave());
+        //usuarioCrear.setUsuario(request.getUsuario());
+        //usuarioCrear.setSecret(secret);
+        Usuario newUser = usuarioRepository.save(usuarioCrear);
+
+        return newUser;
     }
 
     /*

@@ -4,7 +4,12 @@ import fmat.aplicaciones.nube.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import fmat.aplicaciones.nube.model.request.UsuarioRequest;
 import java.util.List;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api")
@@ -23,6 +28,15 @@ public class UsuarioRest {
     public ResponseEntity<Usuario> deleteUser(@PathVariable Integer id) {
         Usuario user = usuarioService.deleteUsuario(id);
         return ResponseEntity.ok().body(user);
+    }
+    @PostMapping("/usuarios")
+    public ResponseEntity<Usuario> postRegister(@RequestBody @Valid UsuarioRequest signupRequest)
+            throws URISyntaxException {
+        Usuario usuario = usuarioService.register(signupRequest);
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 
  /**
