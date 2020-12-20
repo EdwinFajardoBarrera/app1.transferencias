@@ -13,11 +13,11 @@ public class UsuarioRest {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/usuarios")
+    /**@GetMapping("/usuarios")
     public ResponseEntity<List<Usuario>> obtenerUsuario() {
         List<Usuario> usuarios = usuarioService.getUsuarios();
         return ResponseEntity.ok(usuarios);
-    }
+    }**/
 
     @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> deleteUser(@PathVariable Integer id) {

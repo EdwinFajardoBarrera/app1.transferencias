@@ -29,6 +29,7 @@ public class UsuarioService {
     }
 
     public Usuario findUser(Integer id) {
+        //System.out.println(usuarioRepository.findById(id));
         Optional<Usuario> opt = usuarioRepository.findById(id);
         if (opt.isPresent()) {
             return opt.get();

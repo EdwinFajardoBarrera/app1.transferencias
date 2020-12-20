@@ -1,10 +1,5 @@
 package fmat.aplicaciones.nube.model;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Usuarios")
@@ -20,14 +15,10 @@ public class Usuario {
     @Column(name = "clave",unique = true)
     private String clave;
 
-    public Usuario(Integer id, String nombre,String clave) {
-        this.id = id;
-        this.nombre = nombre;
-        this.clave= clave;
-    }
-    public Usuario( String nombre,String clave) {
-        this.nombre = nombre;
-        this.clave= clave;
+    @Column(name = "id_cuenta", unique = true)
+    private int idCuenta;
+
+    public Usuario(){
     }
 
     public Integer getId() {
@@ -54,7 +45,13 @@ public class Usuario {
         this.clave = clave;
     }
 
+    public int getIdCuenta() {
+        return idCuenta;
+    }
 
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
 
     @Override
     public String toString() {
