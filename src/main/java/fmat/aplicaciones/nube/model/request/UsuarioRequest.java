@@ -18,16 +18,16 @@ public class UsuarioRequest {
     private String clave;
 
 
-    private int idCuenta;
+    private Integer idCuenta;
 
     public UsuarioRequest() {
     }
 
-    public int getIdCuenta() {
+    public Integer getCuenta() {
         return idCuenta;
     }
 
-    public void setIdCuenta(int idCuenta) {
+    public void setCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
     }
 

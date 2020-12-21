@@ -1,13 +1,14 @@
 package fmat.aplicaciones.nube.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "Cuentas")
 public class Cuenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column( name = "no_cuenta")
     private String noCuenta;

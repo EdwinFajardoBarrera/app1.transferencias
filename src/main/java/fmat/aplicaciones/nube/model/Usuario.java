@@ -17,7 +17,7 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "id_cuenta", referencedColumnName = "id")
-    private Integer idCuenta;
+    private Cuenta cuenta;
 
     public Usuario(){
     }
@@ -46,12 +46,12 @@ public class Usuario {
         this.clave = clave;
     }
 
-    public int getIdCuenta() {
-        return idCuenta;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
-    public void setIdCuenta(int idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setCuenta(Cuenta idCuenta) {
+        this.cuenta = idCuenta;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Usuario {
         return "{" +
                 " usuario='" + getNombre() + "'" +
                 " clave='" + getClave() + "'" +
-                " idCuenta='" + getIdCuenta() +
+                " idCuenta='" + getCuenta() +
                 "}";
     }
 }
