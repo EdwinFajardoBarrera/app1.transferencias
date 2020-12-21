@@ -23,7 +23,7 @@ public class UsuarioRest {
 
     @GetMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> getUsuario(@PathVariable Integer id) {
-        Usuario usuario = usuarioService.findUser(id);
+        Usuario usuario = usuarioService.getUsuario(id);
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 

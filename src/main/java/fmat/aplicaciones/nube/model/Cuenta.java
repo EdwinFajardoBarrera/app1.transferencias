@@ -14,7 +14,7 @@ public class Cuenta {
     private String noCuenta;
 
     @Column(name = "balance")
-    private double banlance;
+    private Double banlance;
 
     public Cuenta() {
     }

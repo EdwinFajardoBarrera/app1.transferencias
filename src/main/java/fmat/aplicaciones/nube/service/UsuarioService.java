@@ -24,35 +24,33 @@ public class UsuarioService {
     }
 
     public Usuario deleteUsuario(Integer id){
-        Usuario user = findUser(id);
+        Usuario user = getUsuario(id);
         usuarioRepository.deleteById(id);
         return user;
     }
 
-    public Usuario findUser(Integer id){
-        //System.out.println(usuarioRepository.findById(id));
-        Optional<Usuario> opt = usuarioRepository.findById(id);
-        if (opt.isPresent()) {
-            return opt.get();
+    public Usuario getUsuario(Integer id){
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario.isPresent()) {
+            return usuario.get();
         }
         throw new NotFoundException("El usuario no se encuentra");
     }
 
-    public Cuenta findCuenta(Integer id){
-        Optional<Cuenta> opt = cuentaRepository.findById(id);
-        if (opt.isPresent()) {
-            return opt.get();
+    public Cuenta getCuenta(Integer id){
+        Optional<Cuenta> cuenta = cuentaRepository.findById(id);
+        if (cuenta.isPresent()) {
+            return cuenta.get();
         }
         throw new NotFoundException("La cuenta respectiva al usuario no se encuentra");
-
     }
 
     public Usuario updateUsuario(Integer id, UsuarioRequest request) {
-        Usuario user = findUser(id);
+        Usuario user = getUsuario(id);
         user.setNombre(request.getNombre());
         user.setClave(request.getClave());
         if (request.getCuenta()!=null){
-            Cuenta cuenta = findCuenta(request.getCuenta());
+            Cuenta cuenta = getCuenta(request.getCuenta());
             user.setCuenta(cuenta);
         }
         usuarioRepository.save(user);

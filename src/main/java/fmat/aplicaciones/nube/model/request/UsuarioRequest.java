@@ -11,17 +11,14 @@ public class UsuarioRequest {
     @NotEmpty
     private String nombre;
 
-
     @NotNull(message = "Favor de ingresar su clave")
     @Size(min = 9, max = 50)
     @NotEmpty
     private String clave;
 
-
     private Integer idCuenta;
 
-    public UsuarioRequest() {
-    }
+    public UsuarioRequest() {}
 
     public Integer getCuenta() {
         return idCuenta;
