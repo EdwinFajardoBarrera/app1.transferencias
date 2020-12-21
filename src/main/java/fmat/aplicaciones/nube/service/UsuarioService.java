@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Optional;
 import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.exception.NotFoundException;
+import fmat.aplicaciones.nube.model.request.UsuarioRequest;
 import fmat.aplicaciones.nube.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
 
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
@@ -35,6 +35,14 @@ public class UsuarioService {
             return opt.get();
         }
         throw new NotFoundException("El usuario no se encuentra");
+    }
+
+    public Usuario updateUsuario(Integer id, UsuarioRequest request) {
+        Usuario user = findUser(id);
+        user.setNombre(request.getNombre());
+        user.setClave(request.getClave());
+        user.setIdCuenta(request.getIdCuenta());
+        return user;
     }
 
     /*

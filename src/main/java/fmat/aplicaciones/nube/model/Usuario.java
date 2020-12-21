@@ -15,8 +15,9 @@ public class Usuario {
     @Column(name = "clave",unique = true)
     private String clave;
 
-    @Column(name = "id_cuenta", unique = true)
-    private int idCuenta;
+    @OneToOne
+    @JoinColumn(name = "id_cuenta", referencedColumnName = "id")
+    private Integer idCuenta;
 
     public Usuario(){
     }
@@ -58,7 +59,7 @@ public class Usuario {
         return "{" +
                 " usuario='" + getNombre() + "'" +
                 " clave='" + getClave() + "'" +
-                " idCuenta='" +
+                " idCuenta='" + getIdCuenta() +
                 "}";
     }
 }

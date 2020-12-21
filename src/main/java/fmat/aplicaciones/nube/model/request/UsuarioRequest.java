@@ -17,6 +17,20 @@ public class UsuarioRequest {
     @NotEmpty
     private String clave;
 
+
+    private int idCuenta;
+
+    public UsuarioRequest() {
+    }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
     public String getNombre() {
         return nombre;
     }
