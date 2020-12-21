@@ -23,7 +23,6 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-
     public Usuario deleteUsuario(Integer id){
         Usuario user = findUser(id);
         usuarioRepository.deleteById(id);
