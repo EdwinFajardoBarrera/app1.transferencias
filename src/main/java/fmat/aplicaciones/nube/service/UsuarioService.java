@@ -17,6 +17,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
     private CuentaRepository cuentaRepository;
 
     public List<Usuario> getUsuarios(){

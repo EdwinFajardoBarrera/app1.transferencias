@@ -1,11 +1,15 @@
 package fmat.aplicaciones.nube.service;
 
+import fmat.aplicaciones.nube.exception.ExistObjectException;
 import fmat.aplicaciones.nube.exception.NotFoundException;
 import fmat.aplicaciones.nube.model.Cuenta;
+import fmat.aplicaciones.nube.model.request.CuentaRequest;
 import fmat.aplicaciones.nube.repository.CuentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.RequestBody;
+import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +29,16 @@ public class CuentaService {
             return cuenta.get();
         }
         throw new NotFoundException("La cuenta no se encuentra");
+    }
+
+    public Cuenta createCuenta(@Valid @RequestBody CuentaRequest request){
+        if (cuentaRepository.findByNoCuenta(request.getNoCuenta())==null){
+            Cuenta cuenta = new Cuenta();
+            cuenta.setNoCuenta(request.getNoCuenta());
+            cuenta.setBanlance(request.getBalance());
+            cuentaRepository.save(cuenta);
+            return cuenta;
+        }
+        throw new ExistObjectException("El número de cuenta que desea guardar ya existe registrado ");
     }
 }

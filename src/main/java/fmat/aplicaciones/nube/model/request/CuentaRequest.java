@@ -11,7 +11,6 @@ public class CuentaRequest {
     private String noCuenta;
 
     @NotNull(message = "Favor de ingresar su balance")
-    @NotEmpty
     private Double balance;
 
     public CuentaRequest() {}
@@ -28,7 +27,7 @@ public class CuentaRequest {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 }
