@@ -15,12 +15,6 @@ public class UsuarioRest {
     @Autowired
     private UsuarioService usuarioService;
 
-    /**@GetMapping("/usuarios")
-    public ResponseEntity<List<Usuario>> obtenerUsuario() {
-        List<Usuario> usuarios = usuarioService.getUsuarios();
-        return ResponseEntity.ok(usuarios);
-    }**/
-
     @GetMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> getUsuario(@PathVariable Integer id) {
         Usuario usuario = usuarioService.getUsuario(id);

@@ -14,8 +14,12 @@ public class Cuenta {
     private String noCuenta;
 
     @Column(name = "balance")
-    private Double banlance;
+    private Double balance;
 
+    public Cuenta(String noCuenta, Double balance){
+        this.noCuenta = noCuenta;
+        this.balance = balance;
+    }
     public Cuenta() {
     }
 
@@ -35,19 +39,19 @@ public class Cuenta {
         this.noCuenta = noCuenta;
     }
 
-    public double getBanlance() {
-        return banlance;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setBanlance(double banlance) {
-        this.banlance = banlance;
+    public void setBalance(double banlance) {
+        this.balance = banlance;
     }
 
     @Override
     public String toString() {
         return "{" +
                 " número de cuenta ='" + getNoCuenta() + "'" +
-                " balance ='" + getBanlance() + "'" +
+                " balance ='" + getBalance() + "'" +
                 " idCuenta='" + getId() +
                 "}";
     }

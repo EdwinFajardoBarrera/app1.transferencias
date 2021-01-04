@@ -35,7 +35,7 @@ public class CuentaService {
         if (cuentaRepository.findByNoCuenta(request.getNoCuenta())==null){
             Cuenta cuenta = new Cuenta();
             cuenta.setNoCuenta(request.getNoCuenta());
-            cuenta.setBanlance(request.getBalance());
+            cuenta.setBalance(request.getBalance());
             cuentaRepository.save(cuenta);
             return cuenta;
         }
