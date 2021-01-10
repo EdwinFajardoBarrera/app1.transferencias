@@ -1,7 +1,7 @@
 package fmat.aplicaciones.nube.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+// import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "Cuentas")
@@ -10,11 +10,11 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column( name = "no_cuenta")
+    @Column(name = "no_cuenta")
     private String noCuenta;
 
     @Column(name = "balance")
-    private Double banlance;
+    private Double balance;
 
     public Cuenta() {
     }
@@ -35,20 +35,17 @@ public class Cuenta {
         this.noCuenta = noCuenta;
     }
 
-    public double getBanlance() {
-        return banlance;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setBanlance(double banlance) {
-        this.banlance = banlance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                " número de cuenta ='" + getNoCuenta() + "'" +
-                " balance ='" + getBanlance() + "'" +
-                " idCuenta='" + getId() +
-                "}";
+        return "{" + " número de cuenta ='" + getNoCuenta() + "'" + " balance ='" + getBalance() + "'" + " idCuenta='"
+                + getId() + "}";
     }
 }

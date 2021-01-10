@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +18,11 @@ public class CuentaService {
     @Autowired
     private CuentaRepository cuentaRepository;
 
-    public List<Cuenta> getCuentas(){
+    public List<Cuenta> getCuentas() {
         return cuentaRepository.findAll();
     }
 
-    public Cuenta getCuenta(Integer id){
+    public Cuenta getCuenta(Integer id) {
         Optional<Cuenta> cuenta = cuentaRepository.findById(id);
         if (cuenta.isPresent()) {
             return cuenta.get();
@@ -31,11 +30,11 @@ public class CuentaService {
         throw new NotFoundException("La cuenta no se encuentra");
     }
 
-    public Cuenta createCuenta(@Valid @RequestBody CuentaRequest request){
-        if (cuentaRepository.findByNoCuenta(request.getNoCuenta())==null){
+    public Cuenta createCuenta(@Valid @RequestBody CuentaRequest request) {
+        if (cuentaRepository.findByNoCuenta(request.getNoCuenta()) == null) {
             Cuenta cuenta = new Cuenta();
             cuenta.setNoCuenta(request.getNoCuenta());
-            cuenta.setBanlance(request.getBalance());
+            cuenta.setBalance(request.getBalance());
             cuentaRepository.save(cuenta);
             return cuenta;
         }
