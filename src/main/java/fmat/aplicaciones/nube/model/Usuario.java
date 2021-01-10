@@ -1,5 +1,7 @@
 package fmat.aplicaciones.nube.model;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Usuarios")
@@ -12,8 +14,17 @@ public class Usuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "clave",unique = true)
-    private String clave;
+    @Column(name = "secret")
+    @JsonIgnore
+    private String secret;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name ="password")
+    @JsonIgnore
+    private String password;
+
 
     @OneToOne
     @JoinColumn(name = "id_cuenta", referencedColumnName = "id")
@@ -38,14 +49,28 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getClave() {
-        return clave;
+    public void setPassword(String password){
+        this.password = password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public String getPassword(){
+        return this.password;
     }
 
+    public void setSecret(String secret){
+        this.secret = secret;
+    }
+    public String getSecret() {
+        return this.secret;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
     public Cuenta getCuenta() {
         return cuenta;
     }
@@ -57,8 +82,8 @@ public class Usuario {
     @Override
     public String toString() {
         return "{" +
-                " usuario='" + getNombre() + "'" +
-                " clave='" + getClave() + "'" +
+                " nombre='" + getNombre() + "'" +
+                " email='" + getEmail() + "'" +
                 " idCuenta='" + getCuenta() +
                 "}";
     }
