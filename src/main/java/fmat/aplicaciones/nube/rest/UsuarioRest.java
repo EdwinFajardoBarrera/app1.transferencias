@@ -52,7 +52,8 @@ public class UsuarioRest {
         // Aquí se envian los mensajes
         Usuario usr = new Usuario();
         usr.setNombre("Edwin");
-        usr.setClave("jasdkjkasd");
+        usr.setEmail("email");
+        usr.setPassword("password");
 
         rs.send("{'name': 'Edwin}");
         return "{exito: 'NAISU'}";
