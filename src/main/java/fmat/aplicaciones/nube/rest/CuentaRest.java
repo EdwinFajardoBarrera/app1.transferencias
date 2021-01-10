@@ -23,7 +23,7 @@ public class CuentaRest {
         return ResponseEntity.status(HttpStatus.OK).body(cuentas);
     }
 
-    @GetMapping("/cuentas/{id}")
+    @GetMapping("/cuenta/{id}")
     public ResponseEntity<Cuenta> getCuenta(@PathVariable Integer id) {
         Cuenta cuenta = cuentaService.getCuenta(id);
         return  ResponseEntity.status(HttpStatus.OK).body(cuenta);
