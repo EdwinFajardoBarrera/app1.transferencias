@@ -41,4 +41,10 @@ public class CuentaRest {
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
+    @DeleteMapping("/cuentas/{id}")
+    public ResponseEntity<Cuenta> deleteCuenta(@PathVariable Integer id) {
+        Cuenta cuenta = cuentaService.deleteCuenta(id);
+        return ResponseEntity.status(HttpStatus.OK).body(cuenta);
+    }
+
 }

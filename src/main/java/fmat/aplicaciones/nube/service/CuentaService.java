@@ -49,4 +49,10 @@ public class CuentaService {
         cuentaRepository.save(cuenta);
         return cuenta;
     }
+
+    public Cuenta deleteCuenta(Integer id){
+        Cuenta cuenta = getCuenta(id);
+        cuentaRepository.deleteById(id);
+        return cuenta;
+    }
 }
