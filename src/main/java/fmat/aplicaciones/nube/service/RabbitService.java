@@ -1,13 +1,12 @@
 package fmat.aplicaciones.nube.service;
 
-import java.util.Random;
-
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import fmat.aplicaciones.nube.model.Pago;
 
 @Service
 public class RabbitService {
@@ -20,8 +19,8 @@ public class RabbitService {
   String routingkey;
 
   @Scheduled
-  public void send(String message) {
-    rabbitTemplate.convertAndSend(exchange, routingkey, message);
-    System.out.println("Mensaje enviado:= " + message + " ");
+  public void send(Pago pago) {
+    rabbitTemplate.convertAndSend(exchange, routingkey, pago.toString());
+    System.out.println("Detalles de pago:= " + pago.toString() + " ");
   }
 }

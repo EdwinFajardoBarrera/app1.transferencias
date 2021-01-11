@@ -25,13 +25,11 @@ import fmat.aplicaciones.nube.exception.JwtException;
 import fmat.aplicaciones.nube.model.response.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.repository.UsuarioRepository;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-
 
   @Autowired
   private UsuarioRepository usuarioRepository;
@@ -67,37 +65,39 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       }
 
       if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-          Usuario usuario = this.usuarioRepository.findByEmail(username);
-          String secret = usuario.getSecret();
+        Usuario usuario = this.usuarioRepository.findByEmail(username);
+        String secret = usuario.getSecret();
 
-          try{
-            Claims claims = jwtTokenUtil.validateTokenSecret(jwtToken,secret);
-            
-          }catch(UnsupportedJwtException | MalformedJwtException e){
-            System.out.println("Error: " + e.getMessage()+"\n");
-            System.out.println("Excepcion " + e);
-            sendErrorMessage(401, "Error en el formato del token",response);
-            return;
+        try {
+          Claims claims = jwtTokenUtil.validateTokenSecret(jwtToken, secret);
 
-          } catch(SignatureException ex) {
-            System.out.println("Error: " + ex.getMessage()+"\n");
-            System.out.println("Excepcion " + ex);
-            sendErrorMessage(401, "Token invalido",response);
-            return;
-          }
+        } catch (UnsupportedJwtException | MalformedJwtException e) {
+          System.out.println("Error: " + e.getMessage() + "\n");
+          System.out.println("Excepcion " + e);
+          sendErrorMessage(401, "Error en el formato del token", response);
+          return;
 
-          if (jwtTokenUtil.validateToken(token, usuario)) {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(usuario, null, null);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-          }
+        } catch (SignatureException ex) {
+          System.out.println("Error: " + ex.getMessage() + "\n");
+          System.out.println("Excepcion " + ex);
+          sendErrorMessage(401, "Token invalido", response);
+          return;
+        }
+
+        if (jwtTokenUtil.validateToken(token, usuario)) {
+          Authentication authentication = new UsernamePasswordAuthenticationToken(usuario, null, null);
+          SecurityContextHolder.getContext().setAuthentication(authentication);
+        } else {
+          sendErrorMessage(401, "Token invalido", response);
+        }
       }
     }
 
-    
     chain.doFilter(request, response);
   }
 
-  private void sendErrorMessage(int code, String message, HttpServletResponse response) throws ServletException, IOException{
+  private void sendErrorMessage(int code, String message, HttpServletResponse response)
+      throws ServletException, IOException {
     ErrorResponse errorResponse = new ErrorResponse();
     errorResponse.setCode(code);
     errorResponse.setMessage(message);
@@ -111,5 +111,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   private byte[] restResponseBytes(ErrorResponse eErrorResponse) throws IOException {
     String serialized = new ObjectMapper().writeValueAsString(eErrorResponse);
     return serialized.getBytes();
-  } 
+  }
 }

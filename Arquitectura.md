@@ -75,7 +75,7 @@ Visualización y actualización de estado de cuenta. El usuario puede ingresar d
 
 **App 2:**
 
-Ésta aplicación recibe sus entradas de una queue de Apache Kafka, las cuales son archivos JSON con los datos de la transacción de pagos los cuales son validados para ejecutar efectivamente la transacción o resolver una transacción fallida.
+Ésta aplicación recibe sus entradas de una queue de Apache Kafka | RabbitMQ, las cuales son archivos JSON con los datos de la transacción de pagos los cuales son validados para ejecutar efectivamente la transacción o resolver una transacción fallida.
 
 ### 2.3 Diagrama de arquitectura.
 **Diagrama de Arquitectura General**
@@ -110,19 +110,15 @@ _Se enlistan las entidades consideradas para el sistema_
 &nbsp;
 
 Representación de la cuenta de un usuario en el sistema; esta entidad será encargada de mapear
-la información básica de acceso al sistema, como es ID, Clave y su nombre; ésta estará asociada a una 
-cuenta bancaria.
+la información básica de acceso al sistema, como es ID, Clave y su nombre; ésta estará asociada a una cuenta bancaria.
 Una cuenta de usuario estará unicamente asociada a una cuenta bancaria.
 
 * [Cuenta]()
 
-
-
-Representación de la cuenta bancaria de un usuario, la cual esta asociada a una cuenta de usuario.La entidad
-mapeara toda la información asociada a la cuenta monetaría de un usuario, cuyos datos son: Número de cuenta y el balance (Cantidad de dinero disponible).
+Representación de la cuenta bancaria de un usuario, la cual esta asociada a una cuenta de usuario.La entidad mapeara toda la información asociada a la cuenta monetaría de un usuario, cuyos datos son: Número de cuenta y el balance (Cantidad de dinero disponible).
 Con dicha cuenta el usuario podrá realizar operaciones para transferir y recibir dinero.
-Una cuenta bancaria estará unicamente asociada a una cuenta de usuario
-Una cuenta podrá realizar "n" pagos.
+Una cuenta bancaria estará unicamente asociada a una cuenta de usuario Una cuenta podrá realizar "n" pagos.
+
 * [Pagos]()
 &nbsp;
 
