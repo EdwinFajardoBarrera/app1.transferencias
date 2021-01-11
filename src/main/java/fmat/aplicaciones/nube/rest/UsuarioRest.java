@@ -1,5 +1,6 @@
 package fmat.aplicaciones.nube.rest;
 
+import fmat.aplicaciones.nube.model.Pago;
 import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.model.request.UsuarioRequest;
 import fmat.aplicaciones.nube.service.RabbitService;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -48,15 +51,19 @@ public class UsuarioRest {
     }
 
     @GetMapping("/rabbit")
-    public String sendMenssage() {
-        // Aquí se envian los mensajes
-        Usuario usr = new Usuario();
-        usr.setNombre("Edwin");
-        usr.setEmail("email");
-        usr.setPassword("password");
+    public ResponseEntity<Pago> sendMenssage() {
+        Pago pago = new Pago();
 
-        rs.send("{'name': 'Edwin}");
-        return "{exito: 'NAISU'}";
+        pago.setCuentaDestino(2);
+        pago.setCuentaOrigen(1);
+        pago.setEstado("new");
+        pago.setFechaProcesa(new Date(System.currentTimeMillis()));
+        pago.setFechaRegistro(new Date(System.currentTimeMillis()));
+        pago.setMonto(500.0);
+
+        rs.send(pago);
+        return ResponseEntity.ok().body(pago);
+
     }
 
 }

@@ -68,6 +68,7 @@ CREATE TABLE `Pagos` (
 --
 
 LOCK TABLES `Pagos` WRITE;
+
 /*!40000 ALTER TABLE `Pagos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Pagos` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -81,8 +82,10 @@ DROP TABLE IF EXISTS `Usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `clave` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `secret` varchar(500) NOT NULL,
   `id_cuenta` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Usuarios_clave_uindex` (`clave`),

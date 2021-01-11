@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 import fmat.aplicaciones.nube.dto.PagoDTO;
 import fmat.aplicaciones.nube.dto.RegistroDTO;
 import fmat.aplicaciones.nube.exception.InvalidOperationException;
+import fmat.aplicaciones.nube.model.Pago;
 
 @Service
 public class RabbitService {
