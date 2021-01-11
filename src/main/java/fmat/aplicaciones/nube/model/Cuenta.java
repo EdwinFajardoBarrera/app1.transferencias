@@ -1,7 +1,7 @@
 package fmat.aplicaciones.nube.model;
 
 import javax.persistence.*;
-// import javax.persistence.criteria.CriteriaBuilder;
+
 
 @Entity
 @Table(name = "Cuentas")
