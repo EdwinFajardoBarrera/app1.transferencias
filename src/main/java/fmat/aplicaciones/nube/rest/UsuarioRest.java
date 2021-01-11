@@ -53,7 +53,7 @@ public class UsuarioRest {
     @GetMapping("/rabbit")
     public ResponseEntity<Pago> sendMenssage() {
         Pago pago = new Pago();
-
+        /*
         pago.setCuentaDestino(2);
         pago.setCuentaOrigen(1);
         pago.setEstado("new");
@@ -61,7 +61,7 @@ public class UsuarioRest {
         pago.setFechaRegistro(new Date(System.currentTimeMillis()));
         pago.setMonto(500.0);
 
-        rs.send(pago);
+        rs.send(pago);*/
         return ResponseEntity.ok().body(pago);
 
     }

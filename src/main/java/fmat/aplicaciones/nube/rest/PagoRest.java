@@ -43,6 +43,7 @@ public class PagoRest {
         String fechaRegistro = Util.getFormattedDate(pago.getFechaRegistro());
 
         PagoDTO pagoDto = new PagoDTO();
+        pagoDto.setIdPago(pago.getId());
         pagoDto.setMonto(pagoRequest.getMonto());
         pagoDto.setCuentaOrigen(pago.getCuentaOrigen().getNoCuenta());
         pagoDto.setCuentaOrigen(pago.getCuentaDestino().getNoCuenta());
@@ -52,8 +53,6 @@ public class PagoRest {
         
 
         RegistroDTO registro = rs.sendTransfer(pagoDto);
-        
-        Pago pagoRealizado = pagoService.saveTransaction(pago);
 
         return ResponseEntity.status(HttpStatus.OK).body(registro);
     }

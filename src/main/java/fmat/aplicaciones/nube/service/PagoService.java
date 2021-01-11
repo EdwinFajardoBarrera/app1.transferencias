@@ -24,6 +24,7 @@ public class PagoService {
     @Autowired
     private CuentaRepository cuentaRepository;
 
+    @Transactional
     public Pago makeTransaction(PagoRequest request ,Usuario user){
         Pago pago = new Pago();
 
@@ -49,15 +50,10 @@ public class PagoService {
         pago.setFechaRegistro(fechaRegistro);
         pago.setEstado(estado);
 
-        return pago;
-
-    }
-
-    @Transactional
-    public Pago saveTransaction(Pago pago){
         pagoRepository.save(pago);
 
         return pago;
+
     }
 
 }
