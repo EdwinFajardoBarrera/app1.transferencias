@@ -3,6 +3,7 @@ package fmat.aplicaciones.nube.service;
 import fmat.aplicaciones.nube.exception.ExistObjectException;
 import fmat.aplicaciones.nube.exception.NotFoundException;
 import fmat.aplicaciones.nube.model.Cuenta;
+import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.model.request.CuentaRequest;
 import fmat.aplicaciones.nube.repository.CuentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,13 @@ public class CuentaService {
             return cuenta;
         }
         throw new ExistObjectException("El número de cuenta que desea guardar ya existe registrado ");
+    }
+
+    public Cuenta updateCuenta(Integer id, CuentaRequest request){
+        Cuenta cuenta = getCuenta(id);
+        cuenta.setNoCuenta(request.getNoCuenta());
+        cuenta.getBalance(request.getBalance());
+        cuentaRepository.save(cuenta);
+        return cuenta;
     }
 }

@@ -39,8 +39,8 @@ public class Cuenta {
         this.noCuenta = noCuenta;
     }
 
-    public double getBalance() {
-        return balance;
+    public double getBalance(Double balance) {
+        return this.balance;
     }
 
     public void setBalance(double balance) {

@@ -23,7 +23,7 @@ public class CuentaRest {
         return ResponseEntity.status(HttpStatus.OK).body(cuentas);
     }
 
-    @GetMapping("/cuenta/{id}")
+    @GetMapping("/cuentas/{id}")
     public ResponseEntity<Cuenta> getCuenta(@PathVariable Integer id) {
         Cuenta cuenta = cuentaService.getCuenta(id);
         return  ResponseEntity.status(HttpStatus.OK).body(cuenta);
@@ -34,4 +34,11 @@ public class CuentaRest {
         Cuenta cuenta = cuentaService.createCuenta(request);
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
+
+    @PutMapping("/cuentas/{id}")
+    public ResponseEntity<Cuenta> putCuenta(@PathVariable Integer id,@Valid @RequestBody CuentaRequest request) {
+        Cuenta cuenta = cuentaService.updateCuenta(id, request);
+        return ResponseEntity.status(HttpStatus.OK).body(cuenta);
+    }
+
 }
