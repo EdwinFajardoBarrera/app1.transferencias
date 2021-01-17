@@ -36,7 +36,8 @@ public class PagoRest {
     private Logger logger = LogManager.getLogger(this.getClass());
 
     @PostMapping("/pago")
-    public ResponseEntity<RegistroDTO> postRegister(@RequestBody @Valid PagoRequest pagoRequest) throws URISyntaxException {
+    public ResponseEntity<RegistroDTO> postRegister(@RequestBody @Valid PagoRequest pagoRequest)
+            throws URISyntaxException {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Pago pago = pagoService.makeTransaction(pagoRequest, usuario);
         logger.info(pago.toString());
@@ -49,8 +50,6 @@ public class PagoRest {
         pagoDto.setCuentaOrigen(pago.getCuentaDestino().getNoCuenta());
         pagoDto.setEstado(pago.getEstado().name());
         pagoDto.setFechaRegistro(fechaRegistro);
-
-        
 
         RegistroDTO registro = rs.sendTransfer(pagoDto);
 

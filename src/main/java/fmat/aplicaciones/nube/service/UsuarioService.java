@@ -1,4 +1,5 @@
 package fmat.aplicaciones.nube.service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,17 +21,17 @@ public class UsuarioService {
     @Autowired
     private CuentaRepository cuentaRepository;
 
-    public List<Usuario> getUsuarios(){
+    public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    public Usuario deleteUsuario(Integer id){
+    public Usuario deleteUsuario(Integer id) {
         Usuario user = getUsuario(id);
         usuarioRepository.deleteById(id);
         return user;
     }
 
-    public Usuario getUsuario(Integer id){
+    public Usuario getUsuario(Integer id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             return usuario.get();
@@ -38,7 +39,7 @@ public class UsuarioService {
         throw new NotFoundException("El usuario no se encuentra");
     }
 
-    public Cuenta getCuenta(Integer id){
+    public Cuenta getCuenta(Integer id) {
         Optional<Cuenta> cuenta = cuentaRepository.findById(id);
         if (cuenta.isPresent()) {
             return cuenta.get();
@@ -49,10 +50,11 @@ public class UsuarioService {
     public Usuario updateUsuario(Integer id, UsuarioRequest request) {
         Usuario user = getUsuario(id);
         user.setNombre(request.getNombre());
-        user.setPassword(request.getPassword());
+        if (request.getPassword() != null) {
+            user.setPassword(request.getPassword());
+        }
         usuarioRepository.save(user);
         return user;
     }
-
 
 }

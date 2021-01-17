@@ -42,15 +42,15 @@ public class CuentaService {
         throw new ExistObjectException("El número de cuenta que desea guardar ya existe registrado ");
     }
 
-    public Cuenta updateCuenta(Integer id, CuentaRequest request){
+    public Cuenta updateCuenta(Integer id, CuentaRequest request) {
         Cuenta cuenta = getCuenta(id);
         cuenta.setNoCuenta(request.getNoCuenta());
-        cuenta.getBalance(request.getBalance());
+        cuenta.setBalance(request.getBalance());
         cuentaRepository.save(cuenta);
         return cuenta;
     }
 
-    public Cuenta deleteCuenta(Integer id){
+    public Cuenta deleteCuenta(Integer id) {
         Cuenta cuenta = getCuenta(id);
         cuentaRepository.deleteById(id);
         return cuenta;

@@ -1,6 +1,5 @@
 package fmat.aplicaciones.nube.service;
 
-
 import java.util.UUID;
 
 import fmat.aplicaciones.nube.model.request.UsuarioRequest;
@@ -52,7 +51,7 @@ public class AuthService {
         String uuid = RandomStringUtils.randomAlphanumeric(10);
         String noCuenta = noBegin + uuid;
         cuenta.setNoCuenta(noCuenta);
-        cuenta.setBalance(0);
+        cuenta.setBalance(0.0);
 
         cuentaRepository.save(cuenta);
 
@@ -88,5 +87,5 @@ public class AuthService {
             throw new BadCredentialsException();
         }
     }
-    
+
 }

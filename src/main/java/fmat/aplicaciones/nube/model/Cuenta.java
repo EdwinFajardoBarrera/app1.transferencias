@@ -2,7 +2,6 @@ package fmat.aplicaciones.nube.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "Cuentas")
 public class Cuenta {
@@ -16,10 +15,11 @@ public class Cuenta {
     @Column(name = "balance")
     private Double balance;
 
-    public Cuenta(String noCuenta, Double balance){
+    public Cuenta(String noCuenta, Double balance) {
         this.noCuenta = noCuenta;
         this.balance = balance;
     }
+
     public Cuenta() {
     }
 
@@ -39,20 +39,17 @@ public class Cuenta {
         this.noCuenta = noCuenta;
     }
 
-    public double getBalance(Double balance) {
+    public double getBalance() {
         return this.balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                " número de cuenta ='" + getNoCuenta() + "'" +
-                " balance ='" + getBalance() + "'" +
-                " idCuenta='" + getId() +
-                "}";
+        return "{" + " número de cuenta ='" + getNoCuenta() + "'" + " balance ='" + getBalance() + "'" + " idCuenta='"
+                + getId() + "}";
     }
 }
