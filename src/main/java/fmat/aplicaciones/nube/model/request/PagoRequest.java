@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 public class PagoRequest {
 
     @NotNull(message = "Favor de ingresar la cuenta a transferir el dinero")
-    @Size(min = 12,  max = 12)
+    @Size(min = 12)
     @NotEmpty
     private String cuentaDestino;
 
@@ -17,33 +17,30 @@ public class PagoRequest {
     @Max(10000)
     private Double monto;
 
-    public PagoRequest(String cuentaDestino, double monto){
+    public PagoRequest(String cuentaDestino, double monto) {
         this.cuentaDestino = cuentaDestino;
         this.monto = monto;
     }
 
-    public Double getMonto(){
+    public Double getMonto() {
         return this.monto;
     }
 
-    public String getCuentaDestino(){
+    public String getCuentaDestino() {
         return this.cuentaDestino;
     }
 
-    public void setMonto(Double monto){
+    public void setMonto(Double monto) {
         this.monto = monto;
     }
 
-    public void setCuentaDestino(String cuentaDestino){
+    public void setCuentaDestino(String cuentaDestino) {
         this.cuentaDestino = cuentaDestino;
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " cuentaDestino ='" + getCuentaDestino() + "'" +
-            " monto ='" + getMonto() +
-            "}";
+        return "{" + " cuentaDestino ='" + getCuentaDestino() + "'" + " monto ='" + getMonto() + "}";
     }
-    
+
 }

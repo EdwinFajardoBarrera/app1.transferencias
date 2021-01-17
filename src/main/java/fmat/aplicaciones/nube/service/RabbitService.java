@@ -31,22 +31,24 @@ public class RabbitService {
   String routingkey;
 
   @Scheduled
-  public void send(String message) {
+  public void send(PagoDTO pago) {
+    String message = pago.toString();
     rabbitTemplate.convertAndSend(exchange, routingkey, message);
-    logger.info("Mensaje enviado:= ",message);
+    System.out.println("Mensaje enviado: " + message);
+    // logger.info("Mensaje enviado:= ", message);
   }
 
   @Scheduled
-  public RegistroDTO sendTransfer(PagoDTO pago){
+  public RegistroDTO sendTransfer(PagoDTO pago) {
 
     Gson g = new Gson();
 
     String request = g.toJson(pago);
-    ParameterizedTypeReference<String> responseType = new ParameterizedTypeReference<String>() {};
-    String response = rabbitTemplate.convertSendAndReceiveAsType(exchange, routingkey, request,responseType);
+    ParameterizedTypeReference<String> responseType = new ParameterizedTypeReference<String>() {
+    };
+    String response = rabbitTemplate.convertSendAndReceiveAsType(exchange, routingkey, request, responseType);
 
-    
-    if (response == null){
+    if (response == null) {
       logger.error("Mensaje no enviado");
       throw new InvalidOperationException("El mensaje no ha podido ser enviado");
     }

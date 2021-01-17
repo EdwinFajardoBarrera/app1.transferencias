@@ -23,25 +23,25 @@ public class CuentaRest {
         return ResponseEntity.status(HttpStatus.OK).body(cuentas);
     }
 
-    @GetMapping("/cuentas/{id}")
+    @GetMapping("/cuenta/{id}")
     public ResponseEntity<Cuenta> getCuenta(@PathVariable Integer id) {
         Cuenta cuenta = cuentaService.getCuenta(id);
-        return  ResponseEntity.status(HttpStatus.OK).body(cuenta);
+        return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
-    @PostMapping("/cuentas")
+    @PostMapping("/cuenta")
     public ResponseEntity<Cuenta> postCuenta(@Valid @RequestBody CuentaRequest request) {
         Cuenta cuenta = cuentaService.createCuenta(request);
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
-    @PutMapping("/cuentas/{id}")
-    public ResponseEntity<Cuenta> putCuenta(@PathVariable Integer id,@Valid @RequestBody CuentaRequest request) {
+    @PutMapping("/cuenta/{id}")
+    public ResponseEntity<Cuenta> putCuenta(@PathVariable Integer id, @Valid @RequestBody CuentaRequest request) {
         Cuenta cuenta = cuentaService.updateCuenta(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
-    @DeleteMapping("/cuentas/{id}")
+    @DeleteMapping("/cuenta/{id}")
     public ResponseEntity<Cuenta> deleteCuenta(@PathVariable Integer id) {
         Cuenta cuenta = cuentaService.deleteCuenta(id);
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);

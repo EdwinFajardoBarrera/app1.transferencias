@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta, Integer> {
-@Query("SELECT c from Cuenta c WHERE c.noCuenta=?1")
-public Cuenta findByNoCuenta(String noCuenta);
+  @Query("SELECT c from Cuenta c WHERE c.noCuenta=?1")
+  public Cuenta findByNoCuenta(String noCuenta);
+
 }
