@@ -32,7 +32,10 @@ public class RabbitService {
 
   @Scheduled
   public void send(PagoDTO pago) {
-    String message = pago.toString();
+    // String message = pago.toString();
+    Gson g = new Gson();
+    String message = g.toJson(pago);
+
     rabbitTemplate.convertAndSend(exchange, routingkey, message);
     System.out.println("Mensaje enviado: " + message);
     // logger.info("Mensaje enviado:= ", message);

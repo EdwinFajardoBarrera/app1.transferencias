@@ -39,21 +39,21 @@ public class RabbitMQConfig {
     return BindingBuilder.bind(queue).to(exchange).with(routingkey);
   }
 
-  @Bean
-  public AsyncRabbitTemplate asyncRabbitTemplate(
-               RabbitTemplate rabbitTemplate){
-    return new AsyncRabbitTemplate(rabbitTemplate);
-  }
+  // @Bean
+  // public AsyncRabbitTemplate asyncRabbitTemplate(
+  // RabbitTemplate rabbitTemplate){
+  // return new AsyncRabbitTemplate(rabbitTemplate);
+  // }
 
-  @Bean
-  public MessageConverter jsonMessageConverter() {
-    return new Jackson2JsonMessageConverter();
-  }
+  // @Bean
+  // public MessageConverter jsonMessageConverter() {
+  // return new Jackson2JsonMessageConverter();
+  // }
 
   @Bean
   public AmqpTemplate container(ConnectionFactory connectionFactory) {
     final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-    rabbitTemplate.setMessageConverter(jsonMessageConverter());
+    // rabbitTemplate.setMessageConverter(jsonMessageConverter());
     return rabbitTemplate;
   }
 }
