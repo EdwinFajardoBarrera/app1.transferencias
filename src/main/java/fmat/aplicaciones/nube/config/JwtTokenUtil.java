@@ -47,10 +47,7 @@ public class JwtTokenUtil implements Serializable {
   // check if the token has expired
   private Boolean isTokenExpired(DecodedToken token) {
     try {
-      System.out.println("=========================");
       Date date = new Date(Long.parseLong(token.ext));
-      System.out.println(token.ext);
-      System.out.println(date.toString());
       return date.before(new Date());
     } catch (Exception e) {
       e.printStackTrace();

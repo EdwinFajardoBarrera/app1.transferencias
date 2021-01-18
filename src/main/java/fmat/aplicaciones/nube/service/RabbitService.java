@@ -1,4 +1,5 @@
 package fmat.aplicaciones.nube.service;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,36 +30,41 @@ public class RabbitService {
 
   @Scheduled
   public void send(PagoDTO pago) {
-    // String message = pago.toString();
     Gson g = new Gson();
     String message = g.toJson(pago);
 
     rabbitTemplate.convertAndSend(exchange, routingkey, message);
 
-    //create csv
-    String filename = pago.getIdPago()+".csv";
+    // create csv
+    String filename = pago.getIdPago() + ".csv";
     try {
       File file = new File(filename);
       if (file.createNewFile()) {
         System.out.println("File created: " + file.getName());
         FileWriter csvWriter = new FileWriter(file);
-        csvWriter.append("Id de pago");;
+        csvWriter.append("Id de pago");
+        ;
         csvWriter.append(",");
-        csvWriter.append("Monto");;
+        csvWriter.append("Monto");
+        ;
         csvWriter.append(",");
-        csvWriter.append("Cuenta de destino");;
+        csvWriter.append("Cuenta de destino");
+        ;
         csvWriter.append(",");
         csvWriter.append("Cuenta origen");
         csvWriter.append(",");
         csvWriter.append("Fecha de Registro");
         csvWriter.append(",");
-        csvWriter.append("Fecha de procesamiento");;
+        csvWriter.append("Fecha de procesamiento");
+        ;
         csvWriter.append(",");
-        csvWriter.append("Estado");;
+        csvWriter.append("Estado");
+        ;
         csvWriter.append("\n");
         csvWriter.append(pago.getIdPago().toString());
         csvWriter.append(",");
-        csvWriter.append(pago.getMonto().toString());;
+        csvWriter.append(pago.getMonto().toString());
+        ;
         csvWriter.append(",");
         csvWriter.append(pago.getCuentaDestino());
         csvWriter.append(",");
@@ -66,9 +72,11 @@ public class RabbitService {
         csvWriter.append(",");
         csvWriter.append(pago.getFechaRegistro());
         csvWriter.append(",");
-        csvWriter.append(pago.getFechaProcesa());;
+        csvWriter.append(pago.getFechaProcesa());
+        ;
         csvWriter.append(",");
-        csvWriter.append(pago.getEstado());;
+        csvWriter.append(pago.getEstado());
+        ;
         csvWriter.append("\n");
         csvWriter.flush();
         csvWriter.close();
@@ -81,9 +89,10 @@ public class RabbitService {
       e.printStackTrace();
     }
 
-
+    System.out.println("========");
     System.out.println("Mensaje enviado: " + message);
-    // logger.info("Mensaje enviado:= ", message);
+    System.out.println("========");
+
   }
 
   @Scheduled
