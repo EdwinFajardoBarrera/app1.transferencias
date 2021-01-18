@@ -1,9 +1,8 @@
 package fmat.aplicaciones.nube.service;
-
-import java.util.Random;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import com.google.gson.Gson;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -12,11 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import fmat.aplicaciones.nube.dto.PagoDTO;
 import fmat.aplicaciones.nube.dto.RegistroDTO;
 import fmat.aplicaciones.nube.exception.InvalidOperationException;
-import fmat.aplicaciones.nube.model.Pago;
 
 @Service
 public class RabbitService {
@@ -37,6 +34,54 @@ public class RabbitService {
     String message = g.toJson(pago);
 
     rabbitTemplate.convertAndSend(exchange, routingkey, message);
+
+    //create csv
+    String filename = pago.getIdPago()+".csv";
+    try {
+      File file = new File(filename);
+      if (file.createNewFile()) {
+        System.out.println("File created: " + file.getName());
+        FileWriter csvWriter = new FileWriter(file);
+        csvWriter.append("Id de pago");;
+        csvWriter.append(",");
+        csvWriter.append("Monto");;
+        csvWriter.append(",");
+        csvWriter.append("Cuenta de destino");;
+        csvWriter.append(",");
+        csvWriter.append("Cuenta origen");
+        csvWriter.append(",");
+        csvWriter.append("Fecha de Registro");
+        csvWriter.append(",");
+        csvWriter.append("Fecha de procesamiento");;
+        csvWriter.append(",");
+        csvWriter.append("Estado");;
+        csvWriter.append("\n");
+        csvWriter.append(pago.getIdPago().toString());
+        csvWriter.append(",");
+        csvWriter.append(pago.getMonto().toString());;
+        csvWriter.append(",");
+        csvWriter.append(pago.getCuentaDestino());
+        csvWriter.append(",");
+        csvWriter.append(pago.getCuentaOrigen());
+        csvWriter.append(",");
+        csvWriter.append(pago.getFechaRegistro());
+        csvWriter.append(",");
+        csvWriter.append(pago.getFechaProcesa());;
+        csvWriter.append(",");
+        csvWriter.append(pago.getEstado());;
+        csvWriter.append("\n");
+        csvWriter.flush();
+        csvWriter.close();
+        System.out.println("Successfully wrote to the file.");
+      } else {
+        System.out.println("File already exists.");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+
     System.out.println("Mensaje enviado: " + message);
     // logger.info("Mensaje enviado:= ", message);
   }

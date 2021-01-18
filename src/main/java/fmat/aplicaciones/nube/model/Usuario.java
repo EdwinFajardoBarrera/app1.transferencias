@@ -25,7 +25,6 @@ public class Usuario {
     @JsonIgnore
     private String password;
 
-
     @OneToOne
     @JoinColumn(name = "id_cuenta", referencedColumnName = "id")
     private Cuenta cuenta;

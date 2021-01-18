@@ -19,7 +19,7 @@
 		<flyway.version>7.2.0</flyway.version>
 		<flyway.user>root</flyway.user>
 		<flyway.password>root</flyway.password>
-		<database.url>jdbc:mysql://localhost:3306</database.url>
+		<database.url>jdbc:mysql://localhost:3306/Transferencias</database.url>
 		<database.user>root</database.user>
 		<database.password>root</database.password>
 	</properties>
@@ -101,6 +101,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>2.4.0</version>
 		</dependency>
 
 	</dependencies>
