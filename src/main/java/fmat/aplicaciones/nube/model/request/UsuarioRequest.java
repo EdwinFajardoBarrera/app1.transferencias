@@ -11,6 +11,7 @@ public class UsuarioRequest {
     @NotEmpty
     private String nombre;
 
+    @NotNull(message = "Favor de ingresar su email")
     @Email(message = "El email debe ser valido")
     private String email;
 

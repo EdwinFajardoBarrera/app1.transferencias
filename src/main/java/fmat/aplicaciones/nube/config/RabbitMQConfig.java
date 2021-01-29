@@ -1,8 +1,12 @@
 package fmat.aplicaciones.nube.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
@@ -13,6 +17,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.core.FanoutExchange;
 
 @Configuration
 public class RabbitMQConfig {
@@ -24,9 +29,24 @@ public class RabbitMQConfig {
   @Value("${sample.rabbitmq.queue}")
   String queueName;
 
+  private String incomingQueue = "DLQ_queue";
+  private String dlqEx = "dead.letter.test";
+
   @Bean
   Queue queue() {
-    return new Queue(queueName, false);
+    Map<String, Object> args = new HashMap<String, Object>();
+    // The default exchange
+    args.put("x-dead-letter-exchange",dlqEx);
+    // Route to the incoming queue when the TTL occurs
+    args.put("x-dead-letter-routing-key", incomingQueue);
+    // TTL 5 seconds
+    args.put("x-message-ttl", 5000);
+    return new Queue(queueName, false, false , false, args);
+  }
+  
+  @Bean
+  Queue dlqQueue(){
+    return new Queue(incomingQueue);
   }
 
   @Bean
@@ -35,8 +55,18 @@ public class RabbitMQConfig {
   }
 
   @Bean
-  Binding binding(Queue queue, TopicExchange exchange) {
-    return BindingBuilder.bind(queue).to(exchange).with(routingkey);
+  DirectExchange dlqExhange(){
+    return new DirectExchange(dlqEx);  
+  }
+
+  @Bean
+  Binding bindingQueue(TopicExchange exchange) {
+    return BindingBuilder.bind(queue()).to(exchange).with(routingkey);
+  }
+
+  @Bean
+  Binding bindingDLQ(DirectExchange exchange) {
+    return BindingBuilder.bind(dlqQueue()).to(exchange).with(routingkey);
   }
 
   // @Bean
