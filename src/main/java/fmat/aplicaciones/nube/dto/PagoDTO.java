@@ -13,6 +13,7 @@ public class PagoDTO {
     private String fechaRegistro;
     private String fechaProcesa;
     private String estado;
+    private Integer retry;
 
     public PagoDTO(Integer idPago, Double monto, String cuentaOrigen, String cuentaDestino, String fechaRegistro,
             String fechaProcesa, String estado) {
@@ -23,9 +24,11 @@ public class PagoDTO {
         this.fechaRegistro = fechaRegistro;
         this.fechaProcesa = fechaProcesa;
         this.estado = estado;
+        this.retry = 0;
     }
 
     public PagoDTO() {
+        this.retry = 0;
     }
 
     public Integer getIdPago() {
@@ -56,6 +59,10 @@ public class PagoDTO {
         return this.estado;
     }
 
+    public Integer getRetry(){
+        return this.retry;
+    }
+
     public void setIdPago(Integer idPago) {
         this.idPago = idPago;
     }
@@ -84,12 +91,16 @@ public class PagoDTO {
         this.estado = estado;
     }
 
+    public void setRetry(Integer retry){
+        this.retry = retry;
+    }
+
     @Override
     public String toString() {
         return "{\"idPago\": " + this.getIdPago() + "," + "\"monto\":" + this.getMonto() + "," + "\"cuentaOrigen\": \""
                 + this.getCuentaOrigen() + "\"," + "\"cuentaDestino\": \"" + this.getCuentaDestino() + "\","
                 + "\"fechaRegistro\": \"" + this.getFechaRegistro() + "\"," + "\"fechaProcesa\": \""
-                + this.getFechaProcesa() + "\"," + "\"estado\": \"" + this.getEstado() + "\"}";
+                + this.getFechaProcesa() + "\"," + "\"estado\": \"" + this.getEstado() + "\"retry\": \"" + this.getRetry() + "\"}";
     }
 
 }

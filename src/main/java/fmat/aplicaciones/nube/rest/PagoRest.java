@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fmat.aplicaciones.nube.dto.PagoDTO;
-import fmat.aplicaciones.nube.dto.RegistroDTO;
 import fmat.aplicaciones.nube.model.Pago;
-import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.model.request.PagoRequest;
 import fmat.aplicaciones.nube.service.PagoService;
 import fmat.aplicaciones.nube.service.RabbitService;
@@ -62,6 +59,5 @@ public class PagoRest {
 
         return ResponseEntity.status(HttpStatus.OK).body(transacciones);
 
-        // return pagoService.getUserTransactions(cuentaOrigen)
     }
 }

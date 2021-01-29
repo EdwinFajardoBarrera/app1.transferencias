@@ -35,7 +35,7 @@ public class RabbitService {
 
     rabbitTemplate.convertAndSend(exchange, routingkey, message);
 
-    // create csv
+    /* Esta parte se cambia, ponerla en otro servicio independiente
     String filename = pago.getIdPago() + ".csv";
     try {
       File file = new File(filename);
@@ -87,7 +87,7 @@ public class RabbitService {
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
-    }
+    }*/
 
     System.out.println("========");
     System.out.println("Mensaje enviado: " + message);
