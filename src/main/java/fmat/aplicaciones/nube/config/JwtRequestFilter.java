@@ -78,6 +78,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
           System.out.println("Excepcion " + ex);
           sendErrorMessage(401, "Token invalido", response);
           return;
+        } catch(ExpiredJwtException ec){
+          System.out.println("Error: " + ec.getMessage() + "\n");
+          System.out.println("Excepcion " + ec);
+          sendErrorMessage(401, "El token expiró, favor de ingresar de nuevo al sistema", response);
         }
 
         if (jwtTokenUtil.validateToken(token, usuario)) {

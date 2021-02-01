@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 public class PagoRequest {
 
     @NotNull(message = "Favor de ingresar la cuenta a transferir el dinero")
-    @Size(min = 12)
+    @Size(min = 9, max = 9)
     @NotEmpty
     private String cuentaDestino;
 

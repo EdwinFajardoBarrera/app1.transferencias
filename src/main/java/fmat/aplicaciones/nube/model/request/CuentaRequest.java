@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class CuentaRequest {
     @NotNull(message = "Favor de ingresar su número de cuenta")
-    @Size(min = 10, max = 18)
+    @Size(min = 9, max = 9)
     @NotEmpty
     private String noCuenta;
 

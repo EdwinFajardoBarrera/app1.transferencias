@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import fmat.aplicaciones.nube.dto.PagoDTO;
 import fmat.aplicaciones.nube.model.Pago;
@@ -38,17 +40,7 @@ public class PagoRest {
     public ResponseEntity<PagoDTO> postRegister(@RequestBody @Valid PagoRequest pagoRequest) throws URISyntaxException {
         Pago pago = pagoService.makeTransaction(pagoRequest);
 
-        String fechaRegistro = Util.getFormattedDate(pago.getFechaRegistro());
-
-        PagoDTO pagoDto = new PagoDTO();
-        pagoDto.setIdPago(pago.getId());
-        pagoDto.setMonto(pagoRequest.getMonto());
-        pagoDto.setCuentaOrigen(pago.getCuentaOrigen().getNoCuenta());
-        pagoDto.setCuentaDestino(pago.getCuentaDestino().getNoCuenta());
-        pagoDto.setEstado(pago.getEstado().name());
-        pagoDto.setFechaRegistro(fechaRegistro);
-
-        rs.send(pagoDto);
+        PagoDTO pagoDto = pagoService.sendPayment(pago);
 
         return ResponseEntity.status(HttpStatus.OK).body(pagoDto);
     }
@@ -59,5 +51,14 @@ public class PagoRest {
 
         return ResponseEntity.status(HttpStatus.OK).body(transacciones);
 
+    }
+
+    @PostMapping("/pago/csv")
+    public ResponseEntity<List<PagoDTO>> uploadCSVFile(@RequestParam("file") MultipartFile file) {
+
+        List<Pago> pagos = pagoService.getCsvPagos(file);
+        List<PagoDTO> pagosDTO = pagoService.sendPayments(pagos);
+
+        return ResponseEntity.status(HttpStatus.OK).body(pagosDTO);
     }
 }
