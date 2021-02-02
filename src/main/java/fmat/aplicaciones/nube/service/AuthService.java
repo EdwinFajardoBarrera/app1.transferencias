@@ -54,10 +54,9 @@ public class AuthService {
             usuarioCrear.setEmail(request.getEmail());
             usuarioCrear.setSecret(secret);
 
-            String noBegin = "MX";
             Cuenta cuenta = new Cuenta();
-            String uuid = RandomStringUtils.randomAlphanumeric(10);
-            String noCuenta = noBegin + uuid;
+            String uuid = RandomStringUtils.randomNumeric(9);
+            String noCuenta = uuid;
             cuenta.setNoCuenta(noCuenta);
             cuenta.setBalance(new BigDecimal(0.0));
 

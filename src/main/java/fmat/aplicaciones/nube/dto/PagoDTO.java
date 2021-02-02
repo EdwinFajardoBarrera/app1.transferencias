@@ -3,6 +3,8 @@ package fmat.aplicaciones.nube.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.stereotype.Component;
 
 public class PagoDTO {
@@ -12,8 +14,10 @@ public class PagoDTO {
     private String cuentaOrigen;
     private String cuentaDestino;
     private String fechaRegistro;
+    @JsonIgnore
     private String fechaProcesa;
     private String estado;
+    @JsonIgnore
     private Integer retry;
 
     public PagoDTO(Integer idPago, BigDecimal monto, String cuentaOrigen, String cuentaDestino, String fechaRegistro,
