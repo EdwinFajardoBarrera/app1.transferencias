@@ -52,12 +52,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       try {
         token = DecodedToken.getDecoded(jwtToken);
         username = token.sub;
-
       } catch (IllegalArgumentException e) {
         System.out.println("Unable to get JWT Token");
       } catch (Exception e) {
-        e.printStackTrace();
-        System.out.println("JWT Token has expired");
+        // e.printStackTrace();
+        sendErrorMessage(401, "Token invalido", response);
+        // System.out.println("JWT Token has expired");
       }
 
       if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -66,16 +66,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         try {
           Claims claims = jwtTokenUtil.validateTokenSecret(jwtToken, secret);
-
         } catch (UnsupportedJwtException | MalformedJwtException e) {
-          System.out.println("Error: " + e.getMessage() + "\n");
-          System.out.println("Excepcion " + e);
+          // System.out.println("Error: " + e.getMessage() + "\n");
+          // System.out.println("Excepcion " + e);
           sendErrorMessage(401, "Error en el formato del token", response);
           return;
 
         } catch (SignatureException ex) {
-          System.out.println("Error: " + ex.getMessage() + "\n");
-          System.out.println("Excepcion " + ex);
+          // System.out.println("Error: " + ex.getMessage() + "\n");
+          // System.out.println("Excepcion " + ex);
           sendErrorMessage(401, "Token invalido", response);
           return;
         }

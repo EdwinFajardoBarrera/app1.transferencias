@@ -3,6 +3,9 @@ package fmat.aplicaciones.nube.model.request;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.math.BigDecimal;
+
 import javax.validation.constraints.*;
 
 public class PagoRequest {
@@ -15,14 +18,14 @@ public class PagoRequest {
     @NotNull(message = "Favor de ingresar el monto a transferir")
     @Min(50)
     @Max(10000)
-    private Double monto;
+    private BigDecimal monto;
 
-    public PagoRequest(String cuentaDestino, double monto) {
+    public PagoRequest(String cuentaDestino, BigDecimal monto) {
         this.cuentaDestino = cuentaDestino;
         this.monto = monto;
     }
 
-    public Double getMonto() {
+    public BigDecimal getMonto() {
         return this.monto;
     }
 
@@ -30,7 +33,7 @@ public class PagoRequest {
         return this.cuentaDestino;
     }
 
-    public void setMonto(Double monto) {
+    public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
 

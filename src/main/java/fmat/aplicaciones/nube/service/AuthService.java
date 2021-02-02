@@ -1,5 +1,6 @@
 package fmat.aplicaciones.nube.service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import fmat.aplicaciones.nube.model.request.UsuarioRequest;
@@ -42,7 +43,7 @@ public class AuthService {
         if (usuarioExist) {
             throw new InvalidOperationException("El usuario ya esta registrado en el sistema");
         }
-        try{
+        try {
             Usuario usuarioCrear = new Usuario();
             String secret = UUID.randomUUID().toString();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -58,7 +59,7 @@ public class AuthService {
             String uuid = RandomStringUtils.randomAlphanumeric(10);
             String noCuenta = noBegin + uuid;
             cuenta.setNoCuenta(noCuenta);
-            cuenta.setBalance(0.0);
+            cuenta.setBalance(new BigDecimal(0.0));
 
             cuentaRepository.save(cuenta);
 
@@ -70,7 +71,7 @@ public class AuthService {
 
             return newUser;
 
-        } catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("Error: {}", e.getMessage());
             throw new GenericErrorException();
         }
@@ -79,14 +80,14 @@ public class AuthService {
     public LoginObject login(LoginRequest request) {
         Usuario usr = usuarioRepository.findByEmail(request.getEmail());
 
-        if (usr == null){
+        if (usr == null) {
             throw new BadCredentialsException("El correo no esta registrado en el sistema");
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         String reqUser = request.getEmail();
         String reqPass = request.getPassword();
-        
+
         boolean isPasswordMatch = passwordEncoder.matches(reqPass, usr.getPassword());
 
         if (isPasswordMatch && reqUser.equals(usr.getEmail())) {

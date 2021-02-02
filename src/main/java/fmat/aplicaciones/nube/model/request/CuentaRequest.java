@@ -1,5 +1,7 @@
 package fmat.aplicaciones.nube.model.request;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +13,7 @@ public class CuentaRequest {
     private String noCuenta;
 
     @NotNull(message = "Favor de ingresar su balance")
-    private Double balance;
+    private BigDecimal balance;
 
     public CuentaRequest() {
     }
@@ -24,11 +26,11 @@ public class CuentaRequest {
         this.noCuenta = noCuenta;
     }
 
-    public Double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 }

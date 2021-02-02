@@ -17,5 +17,5 @@ public enum EstadoEnum {
      * Indica que el proceso no fue autorizado.
      */
     NO_AUTORIZADO;
-    
+
 }

@@ -1,13 +1,14 @@
 package fmat.aplicaciones.nube.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
 public class PagoDTO {
 
     private Integer idPago;
-    private Double monto;
+    private BigDecimal monto;
     private String cuentaOrigen;
     private String cuentaDestino;
     private String fechaRegistro;
@@ -15,7 +16,7 @@ public class PagoDTO {
     private String estado;
     private Integer retry;
 
-    public PagoDTO(Integer idPago, Double monto, String cuentaOrigen, String cuentaDestino, String fechaRegistro,
+    public PagoDTO(Integer idPago, BigDecimal monto, String cuentaOrigen, String cuentaDestino, String fechaRegistro,
             String fechaProcesa, String estado) {
         this.idPago = idPago;
         this.monto = monto;
@@ -35,7 +36,7 @@ public class PagoDTO {
         return this.idPago;
     }
 
-    public Double getMonto() {
+    public BigDecimal getMonto() {
         return this.monto;
     }
 
@@ -59,7 +60,7 @@ public class PagoDTO {
         return this.estado;
     }
 
-    public Integer getRetry(){
+    public Integer getRetry() {
         return this.retry;
     }
 
@@ -67,7 +68,7 @@ public class PagoDTO {
         this.idPago = idPago;
     }
 
-    public void setMonto(Double monto) {
+    public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
 
@@ -91,7 +92,7 @@ public class PagoDTO {
         this.estado = estado;
     }
 
-    public void setRetry(Integer retry){
+    public void setRetry(Integer retry) {
         this.retry = retry;
     }
 
@@ -100,7 +101,8 @@ public class PagoDTO {
         return "{\"idPago\": " + this.getIdPago() + "," + "\"monto\":" + this.getMonto() + "," + "\"cuentaOrigen\": \""
                 + this.getCuentaOrigen() + "\"," + "\"cuentaDestino\": \"" + this.getCuentaDestino() + "\","
                 + "\"fechaRegistro\": \"" + this.getFechaRegistro() + "\"," + "\"fechaProcesa\": \""
-                + this.getFechaProcesa() + "\"," + "\"estado\": \"" + this.getEstado() + "\"retry\": \"" + this.getRetry() + "\"}";
+                + this.getFechaProcesa() + "\"," + "\"estado\": \"" + this.getEstado() + "\"retry\": \""
+                + this.getRetry() + "\"}";
     }
 
 }

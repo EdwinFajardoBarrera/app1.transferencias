@@ -1,5 +1,6 @@
 package fmat.aplicaciones.nube.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class PagoService {
             throw new InvalidOperationException("La cuenta destino no esta registrada");
         }
 
-        Double monto = request.getMonto();
+        BigDecimal monto = request.getMonto();
         Date fechaRegistro = new Date();
         EstadoEnum estado = EstadoEnum.PENDIENTE;
 

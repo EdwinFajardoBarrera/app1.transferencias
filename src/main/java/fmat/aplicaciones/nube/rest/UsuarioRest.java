@@ -20,9 +20,6 @@ public class UsuarioRest {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private RabbitService rs;
-
     @GetMapping("/usuarios")
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> usuarios = usuarioService.getUsuarios();

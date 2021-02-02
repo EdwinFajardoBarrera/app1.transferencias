@@ -1,5 +1,7 @@
 package fmat.aplicaciones.nube.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,9 +15,9 @@ public class Cuenta {
     private String noCuenta;
 
     @Column(name = "balance")
-    private Double balance;
+    private BigDecimal balance;
 
-    public Cuenta(String noCuenta, Double balance) {
+    public Cuenta(String noCuenta, BigDecimal balance) {
         this.noCuenta = noCuenta;
         this.balance = balance;
     }
@@ -39,11 +41,11 @@ public class Cuenta {
         this.noCuenta = noCuenta;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return this.balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
