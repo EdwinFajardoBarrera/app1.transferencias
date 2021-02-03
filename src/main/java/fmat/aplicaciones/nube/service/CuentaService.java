@@ -8,9 +8,13 @@ import fmat.aplicaciones.nube.model.Usuario;
 import fmat.aplicaciones.nube.model.request.CuentaRequest;
 import fmat.aplicaciones.nube.repository.CuentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
+import javax.transaction.Transactional;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +59,23 @@ public class CuentaService {
         Cuenta cuenta = getCuenta(id);
         cuentaRepository.deleteById(id);
         return cuenta;
+    }
+
+    @Transactional
+    public Cuenta addBalance(BigDecimal monto){
+        Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Cuenta cuentaUsuario = user.getCuenta();
+
+        if (cuentaUsuario == null){
+            throw new NotFoundException("La cuenta no esta registrada en el sistema");
+        }
+        BigDecimal nuevoBalance = cuentaUsuario.getBalance().add(monto);
+        cuentaUsuario.setBalance(nuevoBalance);
+        cuentaRepository.save(cuentaUsuario);
+
+        return cuentaUsuario;
+        
     }
 
 }

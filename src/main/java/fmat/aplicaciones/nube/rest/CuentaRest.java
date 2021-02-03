@@ -1,6 +1,7 @@
 package fmat.aplicaciones.nube.rest;
 
 import fmat.aplicaciones.nube.model.Cuenta;
+import fmat.aplicaciones.nube.model.request.BalanceRequest;
 import fmat.aplicaciones.nube.model.request.CuentaRequest;
 import fmat.aplicaciones.nube.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class CuentaRest {
     @DeleteMapping("/cuenta/{id}")
     public ResponseEntity<Cuenta> deleteCuenta(@PathVariable Integer id) {
         Cuenta cuenta = cuentaService.deleteCuenta(id);
+        return ResponseEntity.status(HttpStatus.OK).body(cuenta);
+    }
+
+    @PostMapping("/balance")
+    public ResponseEntity<Cuenta> addBalance(@Valid @RequestBody BalanceRequest request){
+        Cuenta cuenta = cuentaService.addBalance(request.getBalance());
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
