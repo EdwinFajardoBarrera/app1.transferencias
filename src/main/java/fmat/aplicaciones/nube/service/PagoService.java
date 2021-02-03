@@ -101,7 +101,7 @@ public class PagoService {
                 throw new InvalidOperationException("La cuenta origen no puede ser igual a la cuenta destino");
             }
 
-            Double monto = pago.getMonto();
+            BigDecimal monto = pago.getMonto();
             Date fechaRegistro = new Date();
             EstadoEnum estado = EstadoEnum.PENDIENTE;
 

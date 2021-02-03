@@ -1,22 +1,24 @@
 package fmat.aplicaciones.nube.dto;
 
+import java.math.BigDecimal;
+
 import com.opencsv.bean.CsvBindByName;
 
 public class PagoCsvDTO {
 
     @CsvBindByName
-    private Double monto;
+    private BigDecimal monto;
 
     @CsvBindByName
     private String cuentaDestino;
 
-    public PagoCsvDTO(Double monto, String cuentaDestino) {
+    public PagoCsvDTO(BigDecimal monto, String cuentaDestino) {
         this.monto = monto;
         this.cuentaDestino = cuentaDestino;
     }
     public PagoCsvDTO(){}
     
-    public Double getMonto() {
+    public BigDecimal getMonto() {
         return this.monto;
     }
 
@@ -24,7 +26,7 @@ public class PagoCsvDTO {
         return this.cuentaDestino;
     }
     
-    public void setMonto(Double monto) {
+    public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
 

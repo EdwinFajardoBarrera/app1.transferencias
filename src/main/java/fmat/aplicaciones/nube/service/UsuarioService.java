@@ -1,5 +1,6 @@
 package fmat.aplicaciones.nube.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,11 @@ public class UsuarioService {
 
     public Usuario deleteUsuario(Integer id) {
         Usuario user = getUsuario(id);
-        usuarioRepository.deleteById(id);
+        if(user.getCuenta().getBalance().compareTo(new BigDecimal(0.0)) == 0){
+            Cuenta cuentaUsuario = user.getCuenta();
+            cuentaRepository.deleteById(cuentaUsuario.getId());
+            usuarioRepository.deleteById(id);
+        }
         return user;
     }
 
@@ -52,6 +57,9 @@ public class UsuarioService {
         user.setNombre(request.getNombre());
         if (request.getPassword() != null) {
             user.setPassword(request.getPassword());
+        }
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
         }
         usuarioRepository.save(user);
         return user;
