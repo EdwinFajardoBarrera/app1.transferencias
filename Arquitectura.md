@@ -37,10 +37,30 @@ https://kafka.apache.org/documentation/
 
 La arquitectura del sistema a gran escala consta de 2 aplicaciónes distribuídas centradas en microservicios, comunicadas de manera asíncrona por una servicio de queues de mensajes como RabbitMQ o Apache Kafka.
 
-Tanto el microsericio 1 como el 2 constan de una arquitectura específica por capas que siguen la siguente jerarquía:
+El servicio 1 tiene la siguiente arquitectura:
+
+- main
+	- java/mx/uady/app1
+		- config
+		- dto
+		- enums
+		- exception
+		- model
+			- request
+			- response
+		- repository
+		- rest
+		- service
+	- resources
+- test
+
+El servicio 2 tiene la siguiente arquitectura:
 
 - main
 	- java/mx/uady/aplicacion-pagos
+		- config
+		- dto
+		- enums
 		- exception
 		- model
 			- request
@@ -183,7 +203,7 @@ HTTP/1.1 200 Succes
 	{
 		"id": Integer,
 		"account_number": String,
-		"balance": Double
+		"balance": BigDecimal
 	},
 	...	
 ]
@@ -195,7 +215,7 @@ HTTP/1.1 200 Succes
 {
 	"id": Integer,
 	"account_number": String,
-	"balance": Double
+	"balance": BigDecimal
 }
 ```
 
@@ -204,7 +224,7 @@ POST /account
 {
 	"id": Integer,
 	"account_number": String,
-	"balance": Double
+	"balance": BigDecimal
 }
 HTTP/1.1 201 Created
 ```
@@ -214,7 +234,7 @@ PUT /account/:id
 {
 	"id": Integer,
 	"account_number": String,
-	"balance": Double
+	"balance": BigDecimal
 }
 HTTP/1.1 200 Succes
 ```
@@ -225,7 +245,7 @@ HTTP/1.1 200 Succes
 {
 	"id": Integer,
 	"account_number": String,
-	"balance": Double
+	"balance": BigDecimal
 }
 ```
 
@@ -235,7 +255,7 @@ HTTP/1.1 200 Succes
 [
 	{
 		"id": Integer,
-		"amount": Double,
+		"amount": BigDecimal,
 		"from_account_id": Integer,
 		"to_account_id": Integer,
 		"status": String [Enum],
@@ -251,7 +271,7 @@ GET /payment/:id
 HTTP/1.1 200 Succes
 {
 	"id": Integer,
-	"amount": Double,
+	"amount": BigDecimal,
 	"from_account_id": Integer,
 	"to_account_id": Integer,
 	"status": String [Enum],
@@ -264,7 +284,7 @@ HTTP/1.1 200 Succes
 POST /payment
 {
 	"id": Integer,
-	"amount": Double,
+	"amount": BigDecimal,
 	"from_account_id": Integer,
 	"to_account_id": Integer,
 	"status": String [Enum],
@@ -278,7 +298,7 @@ HTTP/1.1 201 Created
 PUT /payment/:id
 {
 	"id": Integer,
-	"amount": Double,
+	"amount": BigDecimal,
 	"from_account_id": Integer,
 	"to_account_id": Integer,
 	"status": String [Enum],
@@ -293,13 +313,39 @@ DELETE /payment/:id
 HTTP/1.1 200 Succes
 {
 	"id": Integer,
-	"amount": Double,
+	"amount": BigDecimal,
 	"from_account_id": Integer,
 	"to_account_id": Integer,
 	"status": String [Enum],
 	"register_date": String,
 	"processing_date": String
 }
+```
+```
+GET /transactions
+HTTP/1.1 200 Succes
+[
+	{
+		"id": Integer,
+		"amount": BigDecimal,
+		"from_account_id": Integer,
+		"to_account_id": Integer,
+		"status": String [Enum],
+		"register_date": String,
+		"processing_date": String
+	},
+	...
+]
+```
+```
+POST /addBalance
+HTTP/1.1 200 Succes
+[
+	{
+		"amount": BigDecimal,
+	},
+	...
+]
 ```
 
 ## 4. Criterios de calidad
