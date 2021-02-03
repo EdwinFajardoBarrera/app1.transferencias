@@ -53,6 +53,9 @@ public class UsuarioService {
         if (request.getPassword() != null) {
             user.setPassword(request.getPassword());
         }
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
+        }
         usuarioRepository.save(user);
         return user;
     }
